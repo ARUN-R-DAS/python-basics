@@ -1,3 +1,5 @@
+#main.py : simple switching cotrolled by main.py only
+
 import state_a,state_b,state_c
 
 current_state = 0
