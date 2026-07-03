@@ -1,4 +1,13 @@
-Concept
+Simple Python State Machine
+---------------------------------------
+A minimal state machine implementation in Python where each state is defined in its own file, and a central controller manages state transitions.
 
-- 3 states, a button (key) to cycle between states
-- Each state behaviour must be in a seperate file
+Project Structure
+---------------------------------------
+project/
+├── main.py
+├── state_machine.py
+└── states/
+    ├── state.py
+    ├── state1.py
+    └── state2.py
