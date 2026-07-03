@@ -1,4 +1,4 @@
 Concept
 
-- 2 states, a button (key) to cycle between states
+- 3 states, a button (key) to cycle between states
 - Each state behaviour must be in a seperate file
