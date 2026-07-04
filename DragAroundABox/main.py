@@ -12,6 +12,18 @@ running = True
 clock = pygame.time.Clock()
 
 mousedown = False
+
+#square parameters---------------------------------------
+square_x = 100
+square_y = 100
+square_size = 50
+#--------------------------------------------------------
+def draw_square():
+    pygame.draw.rect(
+        screen,
+        'red',
+        (square_x,square_y,square_size,square_size)
+    )
 #---------------------------------------------------------
 def get_mouse_position():
     global mousedown
@@ -36,10 +48,11 @@ def handle_events():
 #---------------------------------------------------------
 while running:
     
-    get_mouse_position()
     handle_events()
+    get_mouse_position()
 
     screen.fill("black")
+    draw_square()
     pygame.display.flip()
     clock.tick(60)
 #---------------------------------------------------------
