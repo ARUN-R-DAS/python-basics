@@ -17,6 +17,8 @@ mousedown = False
 square_x = 100
 square_y = 100
 square_size = 50
+#click inside square-------------------------------------
+mouse_x, mouse_y = 0,0
 #--------------------------------------------------------
 def draw_square():
     pygame.draw.rect(
@@ -26,10 +28,15 @@ def draw_square():
     )
 #---------------------------------------------------------
 def get_mouse_position():
-    global mousedown
-    if mousedown:
-        mouse_x, mouse_y = pygame.mouse.get_pos()
-        print(mouse_x, mouse_y)
+    global mouse_x, mouse_y
+    mouse_x, mouse_y = pygame.mouse.get_pos()
+#---------------------------------------------------------
+def was_square_clicked():
+    if (
+            square_x < mouse_x < square_x + square_size and
+            square_y < mouse_y < square_y + square_size
+        ):
+            print("Clicked inside square")
 #---------------------------------------------------------
 def handle_events():
     global mousedown
@@ -41,6 +48,7 @@ def handle_events():
             if event.button == 1:
                 print("Left mouse button pressed")
                 mousedown = True
+                was_square_clicked()
         if event.type == pygame.MOUSEBUTTONUP:
             if event.button == 1:
                 print("Left mouse button released")
