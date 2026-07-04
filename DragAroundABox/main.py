@@ -6,19 +6,28 @@ WIDTH = 800
 HEIGHT = 600
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Caption ???")
+pygame.display.set_caption("Move a Square")
 
 running = True
 clock = pygame.time.Clock()
 
 mousedown = False
 
-#square parameters---------------------------------------
 square_x = 100
 square_y = 100
 square_size = 50
-#click inside square-------------------------------------
+
 mouse_x, mouse_y = 0,0
+
+dragging = False
+#--------------------------------------------------------
+def move_sqaure():
+    global dragging
+    global mouse_x, mouse_y
+    global square_x, square_y
+    if dragging:
+        square_x = mouse_x - square_size // 2
+        square_y = mouse_y - square_size // 2
 #--------------------------------------------------------
 def draw_square():
     pygame.draw.rect(
@@ -32,15 +41,19 @@ def get_mouse_position():
     mouse_x, mouse_y = pygame.mouse.get_pos()
 #---------------------------------------------------------
 def was_square_clicked():
+    global dragging
     if (
             square_x < mouse_x < square_x + square_size and
             square_y < mouse_y < square_y + square_size
         ):
             print("Clicked inside square")
+            dragging = True
+            print("Started dragging")
 #---------------------------------------------------------
 def handle_events():
     global mousedown
     global running
+    global dragging
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -53,6 +66,10 @@ def handle_events():
             if event.button == 1:
                 print("Left mouse button released")
                 mousedown = False
+                if dragging:
+                    dragging = False
+                    print("Stopped dragging")
+                
 #---------------------------------------------------------
 while running:
     
@@ -60,7 +77,9 @@ while running:
     get_mouse_position()
 
     screen.fill("black")
+    move_sqaure()
     draw_square()
+
     pygame.display.flip()
     clock.tick(60)
 #---------------------------------------------------------
