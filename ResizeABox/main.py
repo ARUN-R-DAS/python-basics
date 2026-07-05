@@ -30,11 +30,26 @@ def detect_square_edges():
     global mouse_x, mouse_y
     global square_x, square_x_size, square_y, square_y_size
     # pt1 (100,100) pt2 (150,100) pt3 (100,150) pt4 (150,150)
-    # top edge
-    if (square_x < mouse_x < square_x + square_x_size and
+    if (
+        square_x < mouse_x < square_x + square_x_size and
         square_y - detection_offset <= mouse_y <= square_y + detection_offset
     ):
         display_text('Mouse on top edge')
+    elif(
+        square_y - detection_offset < mouse_y < square_y + square_y_size + detection_offset and
+        square_x - detection_offset <= mouse_x <= square_x + detection_offset
+    ):
+        display_text('Mouse on left edge')
+    elif(
+        square_y - detection_offset < mouse_y < square_y + square_y_size + detection_offset and
+        square_x + square_x_size - detection_offset <= mouse_x <= square_x + square_x_size + detection_offset
+    ):
+        display_text('Mouse on right edge')
+    elif(
+        square_x - detection_offset <= mouse_x <= square_x + square_x_size + detection_offset and
+        square_y + square_y_size - detection_offset <= mouse_y <= square_y + square_y_size + detection_offset
+    ):
+        display_text('Mouse on bottom edge')
     else:
         display_text(' ')
 #----------------------------------------------
