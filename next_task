@@ -1,0 +1,19 @@
+concept
+----------------------------
+
+make a class for square
+keep all the data and behaviour of square inside the class
+
+class Square:
+    def __init__(self):
+        self.rect = pygame.Rect(100, 100, 50, 50)
+        self.is_dragging = False
+
+    def update(self):
+        if self.is_dragging:
+            self.rect.center = pygame.mouse.get_pos()
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, "red", self.rect)
+
+make multiple movable squares
