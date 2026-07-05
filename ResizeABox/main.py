@@ -36,7 +36,7 @@ min_size = 25
 def resize_square():
     global current_edge
     global dragging
-    global square_y,square_y_size
+    global square_x,square_x_size,square_y,square_y_size
     global old_square
 
     if dragging:
@@ -44,6 +44,13 @@ def resize_square():
             square_y = mouse_y
             square_y_size = max(min_size,((old_square['sq_y'] + old_square['sq_y_size']) - square_y))
             # restrict the resizing to a min value
+        elif current_edge == 'bottom':
+            square_y_size = max(min_size,mouse_y - square_y)
+        elif current_edge == 'left':
+            square_x = mouse_x
+            square_x_size = max(25,(old_square['sq_x_size'] + old_square['sq_x']) - square_x)
+        elif current_edge == 'right':
+            square_x_size = max(min_size,mouse_x - square_x)
 #----------------------------------------------
 def display_text(text):
     font = pygame.font.Font(None, 48)
