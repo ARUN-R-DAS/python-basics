@@ -1,2 +1,4 @@
+concept
+---------------------------------------
 - Create a box (square) in pygame
 - Make it possible to resize the box by dragging its 4 edges and corners
