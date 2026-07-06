@@ -1,41 +1,52 @@
 import pygame
-class Rect:
-    def __init__(self, x, y, width, height, color):
-        self.rect = pygame.Rect(x, y, width, height)
+#-----------------------------------------------------------------------------------
+class Box:
+    def __init__(self, color, screen, corner1 = (100,100), corner2 = (150,150)):
+        # create rectangle obj using 2 coordinates (topLeft & bottom_right)
         self.color = color
-    def draw(self, screen):
-        pygame.draw.rect(screen, self.color, self.rect)
-
+        self.screen = screen
+        
+        self.corner1 = corner1
+        self.corner2 = corner2
+        # find x, y, width, height from coordinates
+        x = corner1[0]
+        y = corner1[1]
+        width = corner2[0] - corner1[0]
+        height = corner2[1] - corner1[1]
+        #create pygame.Rect object
+        self.box = pygame.Rect(x, y, width, height)
+    
+    def draw(self):
+        pygame.draw.rect(self.screen, self.color, self.box)
+#-----------------------------------------------------------------------------------
 class Game:
     def __init__(self):
         pygame.init()
 
         self.WIDTH = 800
         self.HEIGHT = 600
-
         self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
-        pygame.display.set_caption('Practice_class_box')
-
-        self.clock = pygame.time.Clock()
         self.running = True
+        self.clock = pygame.time.Clock()
 
-        self.R1 = Rect(100, 100, 50, 50, 'red')
-    
-    def event_handling(self):
+        pygame.display.set_caption('Practice OOP principles')
+
+        self.b1 = Box('red', self.screen, (100,100), (200,200))
+
+    def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
-    
+
     def run(self):
         while self.running:
-            self.event_handling()
+            self.handle_events()
 
             self.screen.fill('black')
-            self.R1.draw(self.screen)
+            self.b1.draw()
 
             pygame.display.flip()
             self.clock.tick(60)
-        
         pygame.quit()
 
 game = Game()
