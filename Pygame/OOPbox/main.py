@@ -37,6 +37,11 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
+            # if x pressed, make the box larger
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_x:
+                    print('x key pressed')
+                    
 
     def run(self):
         while self.running:

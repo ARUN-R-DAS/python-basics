@@ -1,4 +1,14 @@
 concept
 ----------------------------
+function to update (redraw the rectangle) when corners change
+def update_rect(self):
+    x = self.corner1[0]
+    y = self.corner1[1]
+    width = self.corner2[0] - self.corner1[0]
+    height = self.corner2[1] - self.corner1[1]
+    self.box = pygame.Rect(x, y, width, height)
 
-???
+Then:
+
+self.b1.corner2 = (300, 300)
+self.b1.update_rect()
