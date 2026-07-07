@@ -22,3 +22,4 @@ while True:
         print("Player healed 5 health")
 
     print(f"Player Health: {player.health}")
+
