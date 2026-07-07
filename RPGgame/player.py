@@ -1,16 +1,18 @@
+from weapons import AVAILABLE_WEAPONS
+
 class Player():
     def __init__(self):
         self.health = 100
         self.max_health = 100
-        self.current_weapon = None
+        self.current_weapon = AVAILABLE_WEAPONS['fist']
     
     def __str__(self):
         return (
             f"""
             ===========================
             Health: {self.health}/{self.max_health}
-            Current_weapon: {self.current_weapon}
-            Attack: 0
+            Current_weapon: {self.current_weapon.name}
+            Attack: {self.current_weapon.damage}
             Defence: 0
             ==========================
         """

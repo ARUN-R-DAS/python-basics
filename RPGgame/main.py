@@ -1,19 +1,21 @@
 import os
 
 from player import Player
+from weapons import AVAILABLE_WEAPONS
 
 player = Player()
 
- # clear the screen
-os.system('cls' if os.name == 'nt' else 'clear')
 #------------------------------------------------------------------
 def take_input():
-    print("--------------------------------------------")
-    print("Commands Available:")
-    print("1: take 10 damage")
-    print("2: heal 5 health")
-    print("--------------------------------------------")
-    
+    print("""
+    --------------------------------------------
+    Commands Available:
+    1: take 10 damage
+    2: heal 5 health
+    3: Equip Sword
+    4: Sheath Sword
+    --------------------------------------------
+    """)
     try:
         i = int(input("input: "))
     except:
@@ -33,11 +35,16 @@ def handle_game(i):
     elif i == 2:
         player.heal(5)
         print("Player healed 5 health")
+    elif i == 3:
+        player.current_weapon = AVAILABLE_WEAPONS["sword"]
+    elif i == 4:
+        player.current_weapon = AVAILABLE_WEAPONS["fist"]
     else:
         print("Invalid input")
 
     print(player)
 #------------------------------------------------------------------
+clear_screen()
 while True:
 
     i = take_input()
