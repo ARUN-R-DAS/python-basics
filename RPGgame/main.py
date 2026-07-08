@@ -1,55 +1,59 @@
 import os
+import pygame
 
-from player import Player
+from actor import Actor
 from weapons import AVAILABLE_WEAPONS
 
-player = Player()
+player = Actor('Player', 100, 100, 100, 100)
+enemy = Actor('Goblin', 200, 100, 80, 80)
 
-#------------------------------------------------------------------
-def take_input():
-    print("""
-    --------------------------------------------
-    Commands Available:
-    1: take 10 damage
-    2: heal 5 health
-    3: Equip Sword
-    4: Sheath Sword
-    --------------------------------------------
-    """)
-    try:
-        i = int(input("input: "))
-    except:
-        i = None
+class Game:
+    def __init__(self):
+        pygame.init()
 
-    print("--------------------------------------------")
+        self.WIDTH = 800
+        self.HEIGHT = 600
+        self.screen = pygame.display.set_mode((self.WIDTH, self.HEIGHT))
+        self.clock = pygame.time.Clock()
 
-    return i
-#------------------------------------------------------------------
-def clear_screen():
-    os.system('cls' if os.name == 'nt' else 'clear')
-#------------------------------------------------------------------
-def handle_game(i):
-    if i == 1:
-        player.take_damage(10)
-        print("Player took 10 damage")
-    elif i == 2:
-        player.heal(5)
-        print("Player healed 5 health")
-    elif i == 3:
-        player.current_weapon = AVAILABLE_WEAPONS["sword"]
-    elif i == 4:
-        player.current_weapon = AVAILABLE_WEAPONS["fist"]
-    else:
-        print("Invalid input")
+        pygame.display.set_caption('RPG Game')
 
-    print(player)
-#------------------------------------------------------------------
-clear_screen()
-while True:
+        self.running = True
 
-    i = take_input()
+    def handle_events(self):
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                self.running = False
+            
+            keys = pygame.key.get_pressed()
+            speed = 10
 
-    clear_screen()
-    
-    handle_game(i)
+            if keys[pygame.K_a]:
+                player.x -= speed
+            if keys[pygame.K_d]:
+                player.x += speed
+            if keys[pygame.K_w]:
+                player.y -= speed
+            if keys[pygame.K_s]:
+                player.y += speed
 
+
+    def handle_draw(self):
+        self.screen.fill('black')
+
+        pygame.draw.rect(self.screen, 'green', (player.x, player.y, 32, 32))
+        pygame.draw.rect(self.screen, 'red', (enemy.x, enemy.y, 32, 32))
+
+        pygame.display.flip()
+        self.clock.tick(60)
+
+    def run(self):
+        while self.running:
+            self.handle_events()
+            
+            self.handle_draw()
+
+        pygame.quit()
+
+game = Game()
+game.run()

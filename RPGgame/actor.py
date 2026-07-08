@@ -1,10 +1,14 @@
 from weapons import AVAILABLE_WEAPONS
 
-class Player():
-    def __init__(self):
-        self.health = 100
-        self.max_health = 100
+class Actor():
+    def __init__(self, name, x, y, health, max_health):
+        self.name = name
+        self.health = health
+        self.max_health = max_health
         self.current_weapon = AVAILABLE_WEAPONS['fist']
+
+        self.x = x
+        self.y = y
     
     def __str__(self):
         return (
