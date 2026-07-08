@@ -36,7 +36,10 @@ class Game:
                 player.y -= speed
             if keys[pygame.K_s]:
                 player.y += speed
-
+    
+    def clamp_player_pos(self):
+        player.x = max(30, min(player.x, self.WIDTH - 30 - 32))
+        player.y = max(30, min(player.y, 400 - 32))
 
     def handle_draw(self):
         self.screen.fill('black')
@@ -51,6 +54,9 @@ class Game:
         while self.running:
             self.handle_events()
             
+            # print(pygame.mouse.get_pos())
+            self.clamp_player_pos()
+
             self.handle_draw()
 
         pygame.quit()
